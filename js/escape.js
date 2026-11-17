@@ -16,7 +16,12 @@ const ENIGMES = [
   '[ÉNIGME V : texte à écrire]'
 ];
 
-let niveau = 1;   // l'étape en cours (1 = tout en bas). 6 = tout est résolu.
+/* MODE DÉMO : true = pas d'énigmes, toutes les étapes sont ouvertes.
+   On monte simplement en faisant défiler, et on clique la porte en haut.
+   Remettre false pour réactiver les énigmes. */
+const MODE_DEMO_SANS_ENIGMES = true;
+
+let niveau = MODE_DEMO_SANS_ENIGMES ? 6 : 1;   // l'étape en cours (1 = tout en bas). 6 = tout est résolu.
 
 /* Petit raccourci pour créer un élément avec une classe et du texte */
 function creer(balise, classe, texte) {
