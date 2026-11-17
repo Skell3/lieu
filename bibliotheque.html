@@ -1,0 +1,53 @@
+<!doctype html>
+<!--
+  bibliotheque.html — Les conférences passées, rangées comme des livres.
+  Pour la démo : des emplacements vides, à remplir plus tard.
+-->
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bibliothèque</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/commun.css">
+  <style>
+    .recherche { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .recherche input { flex: 1 1 280px; }
+    .filtre { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border: 1px solid var(--sable-doux); font-size: 14px; }
+    .filtre.actif { background: var(--sable); color: var(--marine); border-color: var(--sable); }
+    .rayon { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+    .livre { border: 1px solid var(--trait); display: flex; flex-direction: column; }
+    .livre .bande { height: 8px; }
+    .livre .infos { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .livre .numero { font-size: 12px; letter-spacing: .08em; color: var(--or); }
+    .livre .titre { font-family: 'Cormorant Garamond', serif; font-size: 24px; line-height: 1.3; }
+  </style>
+</head>
+<body>
+  <header class="entete">
+    <a class="lien-nav" href="accueil.html">← Accueil</a>
+    <h1>La bibliothèque</h1>
+    <span class="discret">Bientôt remplie</span>
+  </header>
+
+  <main class="contenu">
+    <div class="recherche">
+      <label for="cherche" class="invisible">Chercher une conférence</label>
+      <input type="search" id="cherche" placeholder="Chercher un titre, un intervenant…">
+      <span class="filtre actif">Tout</span>
+      <span class="filtre">Vidéo</span>
+      <span class="filtre">Notes</span>
+    </div>
+
+    <!-- Les "livres" : une carte par conférence passée -->
+    <div class="rayon">
+      <article class="livre"><div class="bande" style="background: var(--or);"></div><div class="infos"><span class="numero">N° I · [DATE]</span><span class="titre">[TITRE DE LA CONFÉRENCE]</span><span class="discret">[INTERVENANT] · [DURÉE]</span></div></article>
+      <article class="livre"><div class="bande" style="background: var(--emeraude);"></div><div class="infos"><span class="numero">N° II · [DATE]</span><span class="titre">[TITRE DE LA CONFÉRENCE]</span><span class="discret">[INTERVENANT] · [DURÉE]</span></div></article>
+      <article class="livre"><div class="bande" style="background: var(--bordeaux);"></div><div class="infos"><span class="numero">N° III · [DATE]</span><span class="titre">[TITRE DE LA CONFÉRENCE]</span><span class="discret">[INTERVENANT] · [DURÉE]</span></div></article>
+      <article class="livre"><div class="bande" style="background: var(--sable);"></div><div class="infos"><span class="numero">N° IV · [DATE]</span><span class="titre">[TITRE DE LA CONFÉRENCE]</span><span class="discret">[INTERVENANT] · [DURÉE]</span></div></article>
+      <article class="livre"><div class="bande" style="background: var(--or);"></div><div class="infos"><span class="numero">N° V · [DATE]</span><span class="titre">[TITRE DE LA CONFÉRENCE]</span><span class="discret">[INTERVENANT] · [DURÉE]</span></div></article>
+      <article class="livre"><div class="bande" style="background: var(--bordeaux);"></div><div class="infos"><span class="numero">N° VI · [DATE]</span><span class="titre">[TITRE DE LA CONFÉRENCE]</span><span class="discret">[INTERVENANT] · [DURÉE]</span></div></article>
+    </div>
+  </main>
+</body>
+</html>

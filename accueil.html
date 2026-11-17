@@ -1,0 +1,81 @@
+<!doctype html>
+<!--
+  accueil.html — Le hall : agenda, annonce, et les 3 portes
+  (bibliothèque, salle de conférence, bar).
+-->
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accueil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/commun.css">
+  <style>
+    /* L'agenda : une ligne par rendez-vous */
+    .rdv { display: flex; gap: 20px; padding: 16px 0; border-top: 1px solid var(--trait); }
+    .rdv:last-child { border-bottom: 1px solid var(--trait); }
+    .rdv .date { min-width: 80px; font-size: 14px; color: var(--or); }
+    .annonce { padding: 24px; background: var(--bordeaux); display: flex; flex-direction: column; gap: 12px; }
+    .annonce p { margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 24px; line-height: 1.4; }
+    section h2 { font-size: 32px; margin-bottom: 16px; }
+
+    /* Les 3 portes vers les salles */
+    .portes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .porte-salle {
+      min-height: 280px; padding: 24px; border: 1px solid var(--sable-doux); border-bottom: 0;
+      border-radius: 140px 140px 0 0; color: var(--sable); text-decoration: none;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 8px; text-align: center;
+      transition: border-color .2s, background .2s;
+    }
+    .porte-salle:hover { border-color: var(--or); background: rgba(212, 175, 55, 0.08); color: var(--sable); }
+    .porte-salle strong { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 30px; color: var(--or); }
+    .porte-salle span { font-size: 13px; }
+    .point-vert { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--emeraude); margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <header class="entete">
+    <a class="marque" href="accueil.html"><span class="arche arche-mini" aria-hidden="true"></span><span>[NOM DU LIEU]</span></a>
+    <a class="lien-nav" href="index.html">Ressortir</a>
+  </header>
+
+  <main class="contenu">
+    <h1 class="invisible">Accueil</h1>
+
+    <div class="colonnes">
+      <!-- Agenda -->
+      <section>
+        <h2>Agenda</h2>
+        <div class="rdv">
+          <span class="date">Jeu. 19 nov.</span>
+          <div><div>Démonstration du lieu</div><div class="discret">Rendez-vous en salle de conférence</div></div>
+        </div>
+        <div class="rdv">
+          <span class="date">[DATE]</span>
+          <div><div>[TITRE DE LA CONFÉRENCE]</div><div class="discret">[INTERVENANT] · [HEURE]</div></div>
+        </div>
+        <div class="rdv">
+          <span class="date">[DATE]</span>
+          <div><div>[TITRE DE LA CONFÉRENCE]</div><div class="discret">[INTERVENANT] · [HEURE]</div></div>
+        </div>
+      </section>
+
+      <!-- Annonce -->
+      <section>
+        <h2>Annonce</h2>
+        <div class="annonce">
+          <span style="font-size: 13px; letter-spacing: .08em;">[DATE DE L'ANNONCE]</span>
+          <p>[TEXTE DE L'ANNONCE]</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Les 3 portes -->
+    <nav class="portes" aria-label="Les salles">
+      <a class="porte-salle" href="bibliotheque.html"><strong>Bibliothèque</strong><span>Les conférences passées</span></a>
+      <a class="porte-salle" href="conference.html"><strong>Salle de conférence</strong><span>La visio, avec ses règles</span></a>
+      <a class="porte-salle" href="bar.html"><strong>Bar</strong><span><span class="point-vert" aria-hidden="true"></span>Avant et après, en petits groupes</span></a>
+    </nav>
+  </main>
+</body>
+</html>

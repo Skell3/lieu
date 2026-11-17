@@ -1,0 +1,80 @@
+<!doctype html>
+<!--
+  escape.html — L'épreuve : 5 étapes à gravir, de bas en haut.
+  On arrive tout en bas (étape I). Chaque énigme résolue débloque l'étape du dessus.
+  En haut : la dernière porte, qui mène à l'accueil.
+  Raccourci caché pour les habitués : la petite étoile dans l'étape I.
+-->
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L'épreuve</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/commun.css">
+  <style>
+    /* Mise en page de l'épreuve */
+    .montee { display: flex; flex-direction: column; align-items: center; }
+    .etape, .porte-finale {
+      position: relative; width: 100%; max-width: 720px; min-height: 440px; padding: 48px 16px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center;
+    }
+    .corde { width: 1px; height: 80px; background: rgba(212, 175, 55, 0.5); }
+    .chiffre { font-family: 'Cormorant Garamond', serif; font-size: 96px; line-height: 1; }
+    .enigme-texte { margin: 0; max-width: 520px; font-family: 'Cormorant Garamond', serif; font-size: 26px; line-height: 1.4; }
+    .reponse { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .reponse input { width: 260px; }
+    .erreur { margin: 0; min-height: 20px; font-size: 14px; }
+
+    /* Ce qu'on montre selon l'état de l'étape */
+    .etape .bloc-verrou, .etape .bloc-enigme, .etape .bloc-ok { display: none; }
+    .etape.verrouillee .bloc-verrou,
+    .etape.courante .bloc-enigme,
+    .etape.resolue .bloc-ok { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .etape.verrouillee .chiffre { color: rgba(216, 195, 165, 0.4); }
+    .etape.courante .chiffre { color: var(--or); }
+    .etape.resolue .chiffre, .bloc-ok { color: var(--emeraude); }
+
+    /* La dernière porte, fermée puis ouverte */
+    .grande-arche { width: 160px; height: 240px; border-radius: 80px 80px 0 0; }
+    .porte-finale .si-ouverte { display: none; }
+    .porte-finale.ouverte .si-ouverte { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .porte-finale.ouverte .si-fermee { display: none; }
+    .porte-finale .si-fermee { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .porte-finale .si-fermee .grande-arche { border: 1px dashed var(--trait); border-bottom: 0; }
+    .porte-finale.ouverte .grande-arche { border-color: var(--emeraude); }
+    .porte-finale h2 { font-size: 44px; }
+
+    /* L'étoile cachée : presque invisible, elle s'éclaire au survol */
+    .etoile {
+      position: absolute; right: 24px; bottom: 24px; width: 44px; height: 44px;
+      display: inline-flex; align-items: center; justify-content: center; opacity: .35; transition: opacity .3s;
+    }
+    .etoile:hover, .etoile:focus-visible { opacity: 1; }
+  </style>
+</head>
+<body>
+  <main class="montee">
+    <h1 class="invisible">L'épreuve</h1>
+
+    <!-- Tout en haut : la dernière porte -->
+    <section class="porte-finale" id="porte-finale">
+      <div class="si-fermee">
+        <div class="grande-arche"></div>
+        <p class="discret">La dernière porte est encore scellée.</p>
+      </div>
+      <div class="si-ouverte">
+        <div class="grande-arche arche"></div>
+        <h2>Tu es arrivé en haut.</h2>
+        <a class="bouton-or" href="accueil.html">Franchir la dernière porte</a>
+      </div>
+    </section>
+
+    <!-- Les 5 étapes sont fabriquées par escape.js, de V (en haut) à I (en bas) -->
+    <div id="etapes" class="montee" style="width: 100%;"></div>
+
+    <p class="discret" style="padding: 0 16px 48px; letter-spacing: .1em;">Monte. ↑</p>
+  </main>
+  <script src="js/escape.js"></script>
+</body>
+</html>

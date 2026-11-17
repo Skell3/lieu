@@ -1,0 +1,83 @@
+/*
+  commun.css — L'apparence partagée par toutes les pages du site.
+  Palette : marine (fond), or (symboles, actions), émeraude (débloqué, présent),
+  bordeaux (accent), sable (texte).
+*/
+
+/* ---------- Couleurs de la palette ---------- */
+:root {
+  --or: #D4AF37;
+  --marine: #000080;
+  --emeraude: #50C878;
+  --bordeaux: #722F37;
+  --sable: #D8C3A5;
+  --sable-doux: rgba(216, 195, 165, 0.7);
+  --trait: rgba(216, 195, 165, 0.3);
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--marine);
+  color: var(--sable);
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 500; color: var(--or); margin: 0; }
+a { color: var(--or); }
+a:hover { color: var(--sable); }
+[hidden] { display: none !important; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid var(--sable); outline-offset: 4px; }
+
+/* Texte lu seulement par les lecteurs d'écran */
+.invisible {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+
+/* ---------- L'arche : le symbole du lieu ---------- */
+.arche {
+  border: 2px solid var(--or);
+  border-bottom: 0;
+}
+.arche-mini { width: 20px; height: 30px; border-radius: 10px 10px 0 0; }
+
+/* ---------- En-tête des pages membres ---------- */
+.entete {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--trait);
+}
+.entete h1 { font-size: 32px; }
+.entete .lien-nav {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-size: 14px; text-decoration: none;
+}
+.marque { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.marque span { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--or); }
+
+/* ---------- Boutons ---------- */
+.bouton, .bouton-or {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 22px; cursor: pointer; text-decoration: none;
+  font: inherit; font-size: 15px; background: transparent;
+  border: 1px solid var(--sable-doux); color: var(--sable);
+  transition: background .2s, color .2s;
+}
+.bouton-or { border-color: var(--or); color: var(--or); }
+.bouton:hover, .bouton-or:hover { background: var(--or); color: var(--marine); border-color: var(--or); }
+.bouton.actif { background: var(--or); color: var(--marine); border-color: var(--or); }
+.bouton.bordeaux { background: var(--bordeaux); border-color: var(--bordeaux); color: var(--sable); }
+
+/* ---------- Champs de formulaire ---------- */
+label { display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+input[type="text"], input[type="number"], input[type="search"] {
+  min-height: 48px; padding: 0 14px; font: inherit;
+  background: transparent; color: var(--sable); border: 1px solid var(--sable-doux);
+}
+
+/* ---------- Contenu centré des pages membres ---------- */
+.contenu { max-width: 1120px; margin: 0 auto; padding: 40px 24px; display: flex; flex-direction: column; gap: 40px; }
+.colonnes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+.discret { color: var(--sable-doux); font-size: 13px; }

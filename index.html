@@ -1,0 +1,64 @@
+<!doctype html>
+<!--
+  index.html — Page d'arrivée : la porte.
+  Pour entrer, il faut frapper : clic, clic, pause, clic.
+-->
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La porte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/commun.css">
+  <style>
+    /* Mise en page propre à la porte */
+    .scene {
+      min-height: 100vh; padding: 48px 16px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+    }
+    .porte {
+      width: 240px; height: 380px; border-radius: 120px 120px 0 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .4s, background .4s;
+    }
+    .porte.ouverte { border-color: var(--emeraude); background: rgba(80, 200, 120, 0.08); }
+    .heurtoir {
+      width: 72px; height: 72px; border-radius: 50%; padding: 0; cursor: pointer;
+      border: 2px solid var(--or); background: transparent; transition: background .2s;
+    }
+    .heurtoir:hover { background: rgba(212, 175, 55, 0.15); }
+    .entrer { font-family: 'Cormorant Garamond', serif; font-size: 24px; letter-spacing: .08em; }
+    .coups { display: flex; gap: 14px; }
+    .coup { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--sable-doux); }
+    .coup.frappe { background: var(--or); border-color: var(--or); }
+    .message {
+      margin: 0; min-height: 44px; text-align: center;
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 30px;
+    }
+    .indice { margin: 0; font-size: 13px; letter-spacing: .6em; color: rgba(216, 195, 165, 0.55); }
+  </style>
+</head>
+<body>
+  <main class="scene">
+    <h1 class="invisible">La porte</h1>
+
+    <!-- La porte : un heurtoir tant qu'elle est fermée, un lien "Entrer" une fois ouverte -->
+    <div class="porte arche" id="porte">
+      <button type="button" class="heurtoir" id="heurtoir" aria-label="Frapper à la porte"></button>
+      <a class="bouton-or entrer" id="entrer" href="escape.html" hidden>Entrer</a>
+    </div>
+
+    <!-- Les 3 petits ronds qui se remplissent à chaque coup -->
+    <div class="coups" aria-hidden="true">
+      <span class="coup"></span><span class="coup"></span><span class="coup"></span>
+    </div>
+
+    <!-- La phrase qui répond au visiteur -->
+    <p class="message" id="message" aria-live="polite"></p>
+
+    <!-- L'indice discret : deux coups, une pause, un coup -->
+    <p class="indice" aria-label="Indice : deux coups, une pause, un coup">● ● &nbsp;&nbsp;&nbsp; ●</p>
+  </main>
+  <script src="js/porte.js"></script>
+</body>
+</html>

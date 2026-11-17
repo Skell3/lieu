@@ -1,0 +1,100 @@
+<!doctype html>
+<!--
+  conference.html — La salle de conférence.
+  La visio Jitsi est intégrée dans la page, et nos règles sont autour
+  (modes de parole, main levée, temps de parole).
+  Tout le monde arrive dans la MÊME salle (nom fixé dans js/conference.js).
+-->
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salle de conférence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/commun.css">
+  <style>
+    /* Écran d'entrée : choisir son pseudo */
+    .entree { max-width: 420px; margin: 64px auto; padding: 0 16px; display: flex; flex-direction: column; gap: 24px; }
+    .entree h2 { font-size: 40px; text-align: center; }
+    .entree form { display: flex; flex-direction: column; gap: 16px; }
+    .erreur { margin: 0; min-height: 20px; font-size: 14px; }
+
+    /* La salle : visio à gauche, règles à droite (empilées sur téléphone) */
+    .salle { display: flex; flex-wrap: wrap; gap: 24px; padding: 24px; }
+    .zone-visio { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+    #visio { height: 70vh; min-height: 420px; border: 1px solid var(--or); }
+    #visio iframe { width: 100%; height: 100%; border: 0; }
+    .barre-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .panneau { flex: 1 1 300px; align-self: flex-start; padding: 20px; border: 1px solid var(--trait); display: flex; flex-direction: column; gap: 16px; }
+    .panneau h2 { font-size: 28px; }
+    .panneau h3 { font-size: 22px; }
+    .modes { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .modes legend { font-size: 14px; margin-bottom: 8px; }
+    .mode { flex-direction: row; align-items: flex-start; gap: 12px; padding: 12px; border: 1px solid var(--trait); cursor: pointer; }
+    .mode strong { display: block; color: var(--or); font-weight: 500; }
+    .mode span { font-size: 13px; line-height: 1.5; }
+    .mode:has(input:checked) { border-color: var(--or); background: rgba(212, 175, 55, 0.12); }
+    .regle input { width: 100px; }
+    .alerte { margin: 0; min-height: 20px; font-size: 14px; color: var(--or); }
+    .journal { margin: 0; padding: 0; list-style: none; font-size: 13px; line-height: 1.6; max-height: 180px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <header class="entete">
+    <a class="lien-nav" href="accueil.html">← Accueil</a>
+    <h1>Salle de conférence</h1>
+    <span class="discret" id="statut">Pas encore entré</span>
+  </header>
+
+  <!-- Écran d'entrée -->
+  <section class="entree" id="ecran-entree">
+    <h2>Qui entre ?</h2>
+    <form id="form-entree">
+      <label>Ton pseudo
+        <input type="text" id="champ-pseudo" autocomplete="nickname" maxlength="40">
+      </label>
+      <p class="erreur" id="erreur-entree" aria-live="polite"></p>
+      <button type="submit" class="bouton-or">Entrer dans la salle</button>
+      <p class="discret" style="margin: 0;">Ton navigateur va demander l'accès à ta caméra et ton micro : accepte.</p>
+    </form>
+  </section>
+
+  <!-- La salle -->
+  <main class="salle" id="ecran-salle" hidden>
+    <section class="zone-visio">
+      <div id="visio"></div>
+      <div class="barre-actions">
+        <button type="button" class="bouton" id="btn-main">Lever la main</button>
+        <a class="bouton" href="bar.html">Sortir au bar</a>
+        <button type="button" class="bouton bordeaux" id="btn-quitter">Quitter</button>
+      </div>
+      <p class="discret" style="margin: 0;">Problème d'affichage ? <a id="lien-direct" href="#" target="_blank" rel="noopener">Ouvrir la visio dans un nouvel onglet</a></p>
+    </section>
+
+    <aside class="panneau">
+      <h2>Règles de la salle</h2>
+      <fieldset class="modes">
+        <legend>Mode de parole</legend>
+        <label class="mode"><input type="radio" name="mode" value="conference" checked>
+          <span><strong>Conférence</strong> Seul l'intervenant parle. Tous les micros sont coupés.</span></label>
+        <label class="mode"><input type="radio" name="mode" value="debat">
+          <span><strong>Débat</strong> On lève la main pour demander la parole.</span></label>
+        <label class="mode"><input type="radio" name="mode" value="libre">
+          <span><strong>Cercle libre</strong> Chacun ouvre son micro quand il veut.</span></label>
+      </fieldset>
+
+      <div class="regle">
+        <label for="champ-temps">Temps de parole max (minutes, 0 = illimité)</label>
+        <input type="number" id="champ-temps" min="0" max="30" value="3">
+      </div>
+      <p class="alerte" id="alerte-temps" aria-live="polite"></p>
+
+      <h3>Dans la salle</h3>
+      <ul class="journal" id="journal"></ul>
+    </aside>
+  </main>
+
+  <script src="js/conference.js"></script>
+</body>
+</html>

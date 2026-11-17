@@ -1,0 +1,59 @@
+<!doctype html>
+<!--
+  bar.html — Le bar : des tables rondes cliquables.
+  Pour la démo, les tables ne sont pas encore reliées à la visio :
+  on montre le principe (choisir une table, s'asseoir, se lever).
+-->
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le bar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/commun.css">
+  <style>
+    .salle-bar { max-width: 1200px; margin: 0 auto; padding: 40px 24px; display: flex; flex-wrap: wrap; gap: 48px; }
+    .tables { flex: 999 1 560px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 40px 24px; }
+    .place-table { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .table {
+      width: 140px; height: 140px; border-radius: 50%; cursor: pointer;
+      font-family: 'Cormorant Garamond', serif; font-size: 36px;
+      background: transparent; color: var(--sable); border: 1px solid var(--sable-doux);
+      transition: border-color .2s, background .2s;
+    }
+    .table:hover { border-color: var(--or); }
+    .table.choisie { border: 2px solid var(--or); color: var(--or); background: rgba(212, 175, 55, 0.15); }
+    .sieges { display: flex; gap: 6px; }
+    .siege { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--sable-doux); }
+    .siege.pris { background: var(--emeraude); border-color: var(--emeraude); }
+    .panneau {
+      flex: 1 1 300px; align-self: flex-start; padding: 28px; border: 1px solid var(--trait);
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .panneau .grand { font-family: 'Cormorant Garamond', serif; font-size: 44px; line-height: 1; color: var(--or); }
+    .gens { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .gens li { display: flex; align-items: center; gap: 12px; }
+    .pastille { width: 32px; height: 32px; border-radius: 50%; background: var(--bordeaux); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; }
+    .assis { margin: 0; padding: 12px 16px; background: rgba(80, 200, 120, 0.12); border: 1px solid var(--emeraude); font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header class="entete">
+    <a class="lien-nav" href="accueil.html">← Accueil</a>
+    <h1>Le bar</h1>
+    <a class="lien-nav" href="conference.html">Salle de conférence →</a>
+  </header>
+
+  <div class="salle-bar">
+    <!-- Les tables sont fabriquées par bar.js -->
+    <section class="tables" id="tables" aria-label="Les tables"></section>
+
+    <!-- Le panneau de droite : ce qui se passe à la table choisie -->
+    <aside class="panneau" id="panneau" aria-live="polite">
+      <p style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: 26px;">Choisis une table pour t'y asseoir.</p>
+      <p class="discret" style="margin: 0;">Chaque table deviendra une petite salle audio. Les points verts sont les places prises.</p>
+    </aside>
+  </div>
+  <script src="js/bar.js"></script>
+</body>
+</html>
